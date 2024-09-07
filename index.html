@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minesweeper</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+        td {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid black;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        td.mine {
+            background-color: red;
+        }
+        td.number {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minesweeper</h1>
+    <table id="minesweeper-grid"></table>
+
+    <script>
+        async function fetchGrid() {
+            const response = await fetch('/get_grid');
+            const data = await response.json();
+            const grid = data.grid;
+            const table = document.getElementById('minesweeper-grid');
+            table.innerHTML = '';  // Clear previous grid
+
+            grid.forEach((row, rowIndex) => {
+                const tr = document.createElement('tr');
+                row.forEach((cell, colIndex) => {
+                    const td = document.createElement('td');
+                    if (cell === 'M') {
+                        td.classList.add('mine');
+                    } else if (cell !== ' ') {
+                        td.classList.add('number');
+                        td.innerHTML = cell;
+                    }
+                    td.addEventListener('click', () => {
+                        alert(`Clicked cell at row ${rowIndex + 1}, col ${colIndex + 1}`);
+                    });
+                    tr.appendChild(td);
+                });
+                table.appendChild(tr);
+            });
+        }
+
+        // Fetch grid on page load
+        fetchGrid();
+    </script>
+</body>
+</html>
