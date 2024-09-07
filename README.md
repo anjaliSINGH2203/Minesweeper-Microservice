@@ -223,3 +223,6 @@ You can now enhance this basic setup with more functionality:
 
 By following these steps, you should now have a functioning Minesweeper microservice that runs on Linux and can be accessed via a browser!
 
+![Screenshot 2024-09-07 223025](https://github.com/user-attachments/assets/b4071d5e-4f4b-461b-b8c4-e83c9da23f69)
+
+
